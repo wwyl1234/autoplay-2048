@@ -66,7 +66,7 @@ if __name__ == "__main__":
     firefox_browser = webdriver.Firefox(executable_path=gecko_path)
     firefox_browser.get('https://gabrielecirulli.github.io/2048/')
 
-    while is_game_over(firefox_browser):
+    while not is_game_over(firefox_browser):
         # This is algorithm from book which says to repeat up, right, down and left.
         al_strategy(firefox_browser)
 
