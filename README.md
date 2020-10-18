@@ -7,27 +7,39 @@ This is inspired by "Automate the Boring Stuff with Python" by Al Sweigart.
 
 
 
-To get this working for the Firefox browser, you would need to install geckodriver and need the location of the installed geckodriver.
 
-This has been tested on MacOSX. 
+usage: autoplay_2048.py [BROWSER_NAME] --filepath [WEBDRIVER_PATH if needed]
 
-
-
-
-usage: autoplay_2048.py [FILEPATH] 
-
-Autoplays 2048 via Firefox browser given the filepath of the geckodriver.
+Autoplays 2048 via supported browsers that may require filepath of the
+webdriver.
 
 positional arguments:
-  path           the filepath to the geckodriver
+  browser              the name of the web browser. Firefox|Chrome|Safari
 
 optional arguments:
-  -h, --help     show this help message and exit
-  -v, --version  show program's version number and exit
+  -h, --help           show this help message and exit
+  -v, --version        show program's version number and exit
+  --filepath FILEPATH  the filepath to the webdriver
 
 
 
 An example of running this would look something like this (if you are using MacOSX):
-python3 autoplay_2048.py /path/to/geckodriver/
+
+python3 autoplay_2048.py Firefox /path/to/geckodriver/
+
+
+This has been tested on MacOSX. 
+
+To get this working for the Firefox browser, you would need to install geckodriver and need the location of the installed geckodriver.
+
+To get this working for the Chrome browser, you would need to install chromedriver and need the location of the installed chromedriver.
+
+To get this working for the Safari browser, you would need to enable the 'Allow Remote Automation' option in Safari's Develop menu to control Safari via WebDriver.
+
+
+
+
+
+
 
 Note that filepaths are different on different operating systems. 
