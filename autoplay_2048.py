@@ -22,7 +22,6 @@ def al_strategy(driver):
 
     The strategy is to move up, right, down and then left and then repeat.
     """
-
     html_elem = driver.find_element_by_tag_name('html')
     html_elem.send_keys(Keys.UP)
 
@@ -78,20 +77,41 @@ def init_argparse():
             filepath of the webdriver."
     )
     parser.add_argument(
-        "-v", "--version", action="version",
+        "-v",
+        "--version",
+        action="version",
         version=f"{parser.prog} version 1.0.0"
     )
 
-    parser.add_argument('browser',
-                        metavar='browser',
-                        type=str,
-                        help='the name of the web browser. Firefox|Chrome|Safari')
+    parser.add_argument(
+        "--loop",
+         action="store_true",
+         help="set loop to be True which will keep playing the game till user quits"
+    )
 
-    parser.add_argument('--filepath',
-                       dest='filepath',
-                       help='the filepath to the webdriver')
+    parser.add_argument(
+        "browser",
+        metavar="browser",
+        type=str,
+        help="the name of the web browser. Firefox|Chrome|Safari"
+    )
+
+    parser.add_argument(
+        "--filepath",
+        dest="filepath",
+        help="the filepath to the webdriver"
+    )
     return parser
 
+
+def click_restart_button(driver):
+    """Clicks the retry button."""
+    # Need to press the New game button in anchor tag with class of restart-button.
+    try:
+        restart_button = driver.find_element_by_class_name('restart-button')
+        restart_button.click()
+    except NoSuchElementException:
+        print("Cannot find element with the classs of 'restart-button")
 
 if __name__ == "__main__":
 
@@ -101,10 +121,20 @@ if __name__ == "__main__":
     webdriver_path = args.filepath
 
     chosen_driver = init_webdriver(browser, webdriver_path)
-    chosen_driver.get('https://gabrielecirulli.github.io/2048/')
+    chosen_driver.get("https://gabrielecirulli.github.io/2048/")
 
-    while not is_game_over(chosen_driver):
-        # This is algorithm from book which says to repeat up, right, down and left.
-        al_strategy(chosen_driver)
+    print(args.loop)
+    if not args.loop:
+        while not is_game_over(chosen_driver):
+            # This is algorithm from book which says to repeat up, right, down and left.
+            al_strategy(chosen_driver)
 
-    # Either close the browser or stop this program to stop running the program.
+        # Either close the browser or stop this program to stop running the program.
+    else:
+        while True:
+            while not is_game_over(chosen_driver):
+                # This is algorithm from book which says to repeat up, right, down and left.
+                al_strategy(chosen_driver)
+            click_restart_button(chosen_driver)
+
+        # Either close the browser or stop this program to stop running the program.

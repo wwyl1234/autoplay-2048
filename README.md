@@ -7,7 +7,7 @@ This is inspired by "Automate the Boring Stuff with Python" by Al Sweigart.
 
 
 
-
+```
 usage: autoplay_2048.py [BROWSER_NAME] --filepath [WEBDRIVER_PATH if needed]
 
 Autoplays 2048 via supported browsers that may require filepath of the
@@ -20,12 +20,13 @@ optional arguments:
   -h, --help           show this help message and exit
   -v, --version        show program's version number and exit
   --filepath FILEPATH  the filepath to the webdriver
-
+  --loop               set loop to be True which will keep playing the game till user quits
+```
 
 
 An example of running this would look something like this (if you are using MacOSX):
 
-python3 autoplay_2048.py Firefox /path/to/geckodriver/
+`python3 autoplay_2048.py Firefox /path/to/geckodriver/`
 
 
 This has been tested on MacOSX. 
